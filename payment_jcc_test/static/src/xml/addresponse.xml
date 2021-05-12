@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<template id="testtest" xml:space="preserve">
+
+
+    <t t-name="payment_jcc_test.test" t-extend="payment.display_tx_list">
+        <t t-jquery='.list-group-item-text' t-operation='append'>
+            <p>Response Code AAAAAAAAAAAAAA</p>
+        </t>
+    </t>
+</template>
+</odoo>

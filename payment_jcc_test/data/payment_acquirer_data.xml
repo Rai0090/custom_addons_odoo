@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="payment_acquirer_jcc" model="payment.acquirer">
+            <field name="name">jcc</field>
+            <field name="image_128" type="base64" file="payment_jcc_test/static/src/img/jcc_icon.png"/>
+            <field name="module_id" ref="base.module_payment_jcc_test"/>
+            <field name="view_template_id" ref="jcc_form"/>
+            <field name="pre_msg"><![CDATA[
+                <p>You will be redirected to the JCC website after clicking on the payment button.</p>]]>
+            </field>
+            <field name="MerchantID">Enter your merchant id here</field>
+            <field name="AcquirerID">Enter your acquirer id here</field>
+            <field name="Password">Enter your password here</field>
+        </record>
+    </data>
+
+
+</odoo>

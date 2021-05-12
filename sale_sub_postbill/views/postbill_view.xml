@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="_telecom_cron" model="ir.cron">
+        <field name="name">telecom.cron</field>
+        <field name="model_id" ref="model_boc_api"></field>
+        <field name="state">code</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="code">model._telecom_cron()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="((DateTime.now() + (relativedelta(months=1))).replace(day=1, hour=2, minute=0, second=0, microsecond=0)).strftime('%m/%d/%Y %H:%M:%S')" />
+
+    </record>
+
+    <record id="sale_sub_postbilling_form_invoice" model="ir.ui.view">
+        <field name="name">Post billed invoices form</field>
+        <field name="model">account.invoice</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="telephony_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_sub_postbilling_form" model="ir.ui.view">
+        <field name="name">Post billed invoices</field>
+        <field name="model">sale.subscription</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='to_renew']" position="after">
+                <field name="post_billed"/>
+                <field name="is_telephony"/>
+            </xpath>
+            <xpath expr="//field[@name='date_start']" position="after">
+                <field name="telephony_id" attrs="{'invisible':[('is_telephony', '=', False)],'required':[('is_telephony', '=', True)]}"/>
+
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_sub_postbilling_kanban" model="ir.ui.view">
+        <field name="name">Post billed invoices kanban</field>
+        <field name="model">sale.subscription</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='to_renew']" position="after">
+                <field name="post_billed"/>
+<!--                <field name="hosted_telephony"/>-->
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_sub_postbilling_list" model="ir.ui.view">
+        <field name="name">Post billed invoices list</field>
+        <field name="model">sale.subscription</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='to_renew']" position="after">
+                <field name="post_billed"/>
+<!--                <field name="hosted_telephony" attrs="{'invisible':[('post_billed','=',False)]}"/>-->
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="sale_sub_postbilling_template_form" model="ir.ui.view">
+        <field name="name">Hosted telephony form</field>
+        <field name="model">sale.subscription.template</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_template_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[@name='config']/group[@name='invoicing']/field[@name='payment_mode']" position="after">
+                <field name="post_billed"/>
+                <field name="is_telephony"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_sub_postbilling_template_list" model="ir.ui.view">
+        <field name="name">Hosted telephony list</field>
+        <field name="model">sale.subscription.template</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_template_view_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='recurring_rule_type']" position="after">
+                <field name="post_billed"/>
+                <field name="is_telephony"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sale_subscription_order_line_uid" model="ir.ui.view">
+        <field name="name">sale.subscription.order.line.uid</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="telephony_id"/>
+            </xpath>
+
+         </field>
+     </record>
+
+
+</odoo>

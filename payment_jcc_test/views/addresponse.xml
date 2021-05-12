@@ -1,0 +1,11 @@
+
+<templates>
+
+<t t-extend="payment.display_tx_list">
+            <t t-jquery=".list-group-item-text" t-operation="append">
+
+                  aaaa
+            </t>
+</t>
+
+</templates>

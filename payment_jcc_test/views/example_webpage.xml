@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+<odoo>
+
+        <template id="index">
+          <t t-call="website.layout">
+            <div class="oe_structure">
+            <title>Academy</title>
+            <t t-foreach="teachers" t-as="teacher">
+              <p><t t-esc="teacher"/></p>
+            </t>
+          </div>
+          </t>
+        </template>
+</odoo>

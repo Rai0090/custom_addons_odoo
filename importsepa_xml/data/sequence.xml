@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="sequence_self_service" model="ir.sequence">
+            <field name="name">Mandate sequence</field>
+            <field name="code">self.mandate</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">0000219%(range_year)s</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+    </record>
+    
+
+</odoo>
